@@ -1,0 +1,17 @@
+<!-- Will use this template dynamic in order to use the delete functionality acorss other features delete comments, delete rooms, etc. -->
+
+{% extends 'main.html' %}
+
+
+{% block content%}
+
+<form method="POST" action="">
+    {% csrf_token %}
+    <p>Are you sure you want to delete "{{obj}}"?</p>
+
+    <!-- access the request object directly inside of the template to route the user back to the last page -->
+    <a href="{{request.META.HTTP_REFERER}}">Go Back</a>
+    <input type="submit" value="Confirm"/>
+</form>
+
+{% endblock content%}
