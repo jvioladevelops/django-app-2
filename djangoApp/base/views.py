@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
 from .models import Room, Topic, Message, User
 from .forms import RoomForm, UserForm#, MyUserCreationForm
 
@@ -22,15 +23,15 @@ def loginPage(request):
         return redirect('home')
 
     if request.method == 'POST':
-        email = request.POST.get('email').lower()
+        username = request.POST.get('username').lower()
         password = request.POST.get('password')
 
         try:
-            user = User.objects.get(email=email)
+            user = User.objects.get(username=username)
         except:
             messages.error(request, 'User does not exist')
 
-        user = authenticate(request, email=email, password=password)
+        user = authenticate(request, username=username, password=password)
 
         if user is not None:
             login(request, user)
@@ -48,10 +49,10 @@ def logoutUser(request):
 
 
 def registerPage(request):
-    form = MyUserCreationForm()
+    form = UserCreationForm()
 
     if request.method == 'POST':
-        form = MyUserCreationForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
