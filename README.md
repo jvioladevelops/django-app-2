@@ -1,6 +1,6 @@
 
 
-# Discord2.0
+# Discord2.0 
 </div>
 
 ### Cloning the repository
@@ -25,7 +25,7 @@ pip install -r requirements.txt
 
 #
 
-### Running the App
+### Running the App Simply
 
 --> To run the App, we use :
 ```bash
